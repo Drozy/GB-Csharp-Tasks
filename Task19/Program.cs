@@ -18,7 +18,11 @@ int k = digit.Length / 2;
 for (int i=0; i<k; i++)     // сравниваем зеркальные цифры нашего числа
 {
     if (digit[i] == digit[exp-1-i]) poly = true;
-    else poly = false;
+    else 
+    {
+        poly = false;
+        break;
+    }
 }
 
 if (poly) Console.WriteLine("Это полином");
