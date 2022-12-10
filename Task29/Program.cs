@@ -12,16 +12,16 @@ int[] arrRand(int len)      // функция заполнения массив�
     return a;
 }
 
-int[] arrInput(int len)      // функция заполнения массива вручную
-{
-    int[] a = new int[len];
-    for (int i=0; i < a.Length; i++)
-    {
-        Console.Write($"Введите {i+1} число: ");
-        a[i] = Convert.ToInt32(Console.ReadLine());
-    }
-    return a;
-}
+// int[] arrInput(int len)      // функция заполнения массива вручную
+// {
+//     int[] a = new int[len];
+//     for (int i=0; i < a.Length; i++)
+//     {
+//         Console.Write($"Введите {i+1} число: ");
+//         a[i] = Convert.ToInt32(Console.ReadLine());
+//     }
+//     return a;
+// }
 
 void arrPrint(int[] a)      // функция вывода массива
 {
