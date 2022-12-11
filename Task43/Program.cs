@@ -11,17 +11,29 @@
 // double b2 = Convert.ToDouble(Console.ReadLine());
 // Console.Write("Введите k2: ");
 // double k2 = Convert.ToDouble(Console.ReadLine());
-
-// double x = (b2 - b1) / (k1 - k2);
-// double y = k2 * x + b2;
-// Console.WriteLine($"Координаты точки пересечения ({x}; {y})");
+// if (k1 == k2)
+// {
+//     if (b1 == b2) Console.WriteLine("Прямые совпадают");
+//     else Console.WriteLine("Прямые не пересекаются");
+// }
+// else 
+// {
+// // double x = (b2 - b1) / (k1 - k2);
+// // double y = k2 * x + b2;
+// // Console.WriteLine($"Координаты точки пересечения ({x}; {y})");
+// }
 
 // С функциями и массивами
 Console.WriteLine("Введите через пробел параметры первой линии (k1 и b1):");
 double[] line1 = GetArrayFromString(Console.ReadLine());
 Console.WriteLine("Введите через пробел параметры второй линии (k2 и b2):");
 double[] line2 = GetArrayFromString(Console.ReadLine());
-Console.WriteLine($"Координаты точки пересечения ({String.Join(", ", JunctionCoordinates(line1, line2))})");
+if (line1[0] == line2[0])
+{
+    if (line1[1] == line2[1]) Console.WriteLine("Прямые совпадают");
+    else Console.WriteLine("Прямые не пересекаются");
+}
+else Console.WriteLine($"Координаты точки пересечения ({String.Join(", ", JunctionCoordinates(line1, line2))})");
 
 double[] GetArrayFromString(string input)  // ввод массива пользователем
 {
