@@ -5,55 +5,61 @@
 // 27(0,0,1) 90(0,1,1)
 // 26(1,0,1) 55(1,1,1)
 
-using System;
-
-Console.Write("Введите количество строк массива: ");
+Console.Write("Введите количество строк массива (X): ");
 int givenCol = Convert.ToInt32(Console.ReadLine());
-Console.Write("Введите количество столбцов массива: ");
+Console.Write("Введите количество столбцов массива (Y): ");
 int givenRow = Convert.ToInt32(Console.ReadLine());
-Console.Write("Введите количество страниц массива: ");
+Console.Write("Введите количество страниц массива (Z): ");
 int givenPage = Convert.ToInt32(Console.ReadLine());
-int[,,] arr = CreateMatrix(givenCol, givenRow, givenPage);
 
+int[,,] arr = FillUniqNums(givenCol, givenRow, givenPage);
 PrintMatrix(arr);
 
-
-// Заполнение массива
-int[,,] CreateMatrix(int row, int col, int page)
+// Заполнение массива неповторяющимися двузначными числами
+int[,,] FillUniqNums(int row, int col, int page)
 {
     int[,,] matrix = new int[row, col, page];
-     
-
-    for (int i = 0; i < matrix.GetLength(0); i++)
+    for (int k = 0; k < matrix.GetLength(2); k++)   // заполним массив 0 для будущего перебора элементов
     {
-        for (int j = 0; j < matrix.GetLength(1); j++)
+        for (int i = 0; i < matrix.GetLength(0); i++)
         {
-            for (int k = 0; k < matrix.GetLength(2); k++)
+            for (int j = 0; j < matrix.GetLength(1); j++)
             {
-                matrix[i, j, k] = GetUniqueNum(matrix, i, j, k);
+                matrix[i, j, k] = 0;
+            }
+        }
+    }
+    int rnd = new Random().Next(10, 100);
+    for (int k = 0; k < matrix.GetLength(2); k++)
+    {
+        for (int i = 0; i < matrix.GetLength(0); i++)
+        {
+            for (int j = 0; j < matrix.GetLength(1); j++)
+            {
+                while (NotUnique(matrix, rnd))  // ищем неповторяющееся в массиве число
+                    rnd = new Random().Next(10, 100);
+                matrix[i, j, k] = rnd;          // и присваиваем его новому элементу
             }
         }
     }
     return matrix;
 }
 
-// Генератор уникального элемента в массиве, сравнение с предыдущими (уже заданными)
-// не работает :*(
-int GetUniqueNum(int[,,] matrix, int a, int b, int c)
+// Проверка присутствия значения в массиве
+bool NotUnique(int[,,] matrix, int num)
 {
-    int num;
-mark: num = new Random().Next(10, 30);
-    for (int k = 0; k < c; k++)
+    for (int k = 0; k < matrix.GetLength(2); k++)
     {
-        for (int i = 0; i < a; i++)
+        for (int i = 0; i < matrix.GetLength(0); i++)
         {
-            for (int j = 0; j < b; j++)
+            for (int j = 0; j < matrix.GetLength(1); j++)
             {
-                if (num == matrix[i, j, k]) goto mark;
+                if (matrix[i, j, k] == num)
+                    return true;
             }
         }
     }
-    return num;
+    return false;
 }
 
 // Вывод массива
