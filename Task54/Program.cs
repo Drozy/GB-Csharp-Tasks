@@ -17,7 +17,6 @@ PrintMatrix(arr);
 SortElementsInRows(arr);
 PrintMatrix(arr);
 
-
 // Заполнение массива случайными числами
 int[,] FillMatrixRnd(int row, int col)
 {

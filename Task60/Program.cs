@@ -5,4 +5,79 @@
 // 27(0,0,1) 90(0,1,1)
 // 26(1,0,1) 55(1,1,1)
 
+using System;
 
+Console.Write("Введите количество строк массива: ");
+int givenCol = Convert.ToInt32(Console.ReadLine());
+Console.Write("Введите количество столбцов массива: ");
+int givenRow = Convert.ToInt32(Console.ReadLine());
+Console.Write("Введите количество страниц массива: ");
+int givenPage = Convert.ToInt32(Console.ReadLine());
+int[,,] arr = CreateMatrix(givenCol, givenRow, givenPage);
+
+PrintMatrix(arr);
+
+
+// Заполнение массива
+int[,,] CreateMatrix(int row, int col, int page)
+{
+    int[,,] matrix = new int[row, col, page];
+    for (int i = 0; i < matrix.GetLength(0); i++)
+    {
+        for (int j = 0; j < matrix.GetLength(1); j++)
+        {
+            for (int k = 0; k < matrix.GetLength(2); k++)
+            {
+                matrix[i, j, k] = GetUniqueNum(matrix, i, j, k);
+            }
+        }
+    }
+    return matrix;
+}
+
+// Генератор уникального элемента в массиве, сравнение с предыдущими (уже заданными)
+// не работает :*(
+int GetUniqueNum(int[,,] matrix, int a, int b, int c)
+{
+    int num;
+    if (a == 0 && b == 0 && c == 0)
+        num = new Random().Next(10, 30);
+    else
+    {
+        for (int i = 0; i < a; i++)
+        {
+            num = new Random().Next(10, 30);
+            for (int j = 0; j < b; j++)
+            {
+                for (int k = 0; k < c; k++)
+                {
+                    if (num == matrix[i, j, k])
+                    {
+                        i--;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    return num;
+}
+
+// Вывод массива
+void PrintMatrix(int[,,] matrix)
+{
+    Console.WriteLine();
+    for (int k = 0; k < matrix.GetLength(2); k++)
+    {
+        Console.WriteLine($"Page {k}:");
+        for (int i = 0; i < matrix.GetLength(0); i++)
+        {
+            for (int j = 0; j < matrix.GetLength(1); j++)
+            {
+                Console.Write($"{matrix[i, j, k]}({i},{j},{k})\t");
+            }
+            Console.WriteLine();
+        }
+        Console.WriteLine();
+    }
+}

@@ -51,7 +51,7 @@ void PrintMatrix(int[,] matrix)
 // Произведение матриц AB состоит из всех возможных комбинаций скалярных произведений вектор-строк матрицы A и вектор-столбцов матрицы B.
 int[,] MatrixMultiplication(int[,] a, int[,] b)
 {
-    int[,] ab = new int[a.GetLength(0), b.GetLength(1)];    // такие размеры, чтобы функция принимала любые матрицы
+    int[,] ab = new int[a.GetLength(0), b.GetLength(1)];    // размер не только для любых исходных матриц
     for (int i = 0; i < ab.GetLength(0); i++)
     {
         for (int j = 0; j < ab.GetLength(1); j++)
