@@ -22,6 +22,8 @@ PrintMatrix(arr);
 int[,,] CreateMatrix(int row, int col, int page)
 {
     int[,,] matrix = new int[row, col, page];
+     
+
     for (int i = 0; i < matrix.GetLength(0); i++)
     {
         for (int j = 0; j < matrix.GetLength(1); j++)
@@ -40,23 +42,14 @@ int[,,] CreateMatrix(int row, int col, int page)
 int GetUniqueNum(int[,,] matrix, int a, int b, int c)
 {
     int num;
-    if (a == 0 && b == 0 && c == 0)
-        num = new Random().Next(10, 30);
-    else
+mark: num = new Random().Next(10, 30);
+    for (int k = 0; k < c; k++)
     {
         for (int i = 0; i < a; i++)
         {
-            num = new Random().Next(10, 30);
             for (int j = 0; j < b; j++)
             {
-                for (int k = 0; k < c; k++)
-                {
-                    if (num == matrix[i, j, k])
-                    {
-                        i--;
-                        break;
-                    }
-                }
+                if (num == matrix[i, j, k]) goto mark;
             }
         }
     }
